@@ -13,6 +13,7 @@ $c->set_task('description1000', $date, intval(3),intval(1));
 echo 'hadi class '.$c->get_priority();
 $m = new model();
 $m->insert_task('task',$c);
+$m->find_all_task('task');
 /*$res = $m->find_all_task('client');
 
 if (mysqli_num_rows($res) > 0) {
