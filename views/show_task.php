@@ -61,7 +61,19 @@
                <?php echo $row["date"]; ?>
             </td>
             <td>
-            <?php echo $row["priority"]; ?>
+            <?php 
+                if ($row["priority"] == 1){
+                    echo 'Low';
+                }
+                elseif($row["priority"] == 2){
+                    echo 'Medium';
+                }
+                
+                elseif($row["priority"] == 3){
+                    echo 'High';
+                }
+
+            ?>
             </td>
 
             <td>
