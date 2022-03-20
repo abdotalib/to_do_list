@@ -9,12 +9,13 @@
 <body>
     <?php
 
-    include_once('C:/xampp/htdocs/to_do_list/Controllers/Controllers.php');
+    include('../Controllers/Controllers.php');
     $control = new Controllers();
     $res = $control->show_task('task');
+    
     ?>
     <table class="taches">
-        <tr>
+        <tr >
             <th>
                 Description
             </th>
@@ -29,11 +30,29 @@
             <th>
                 Status
             </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                Modify
+            </th>
+            
     </tr>
    <?php 
-    while($row = mysqli_fetch_assoc($res)) {?>
+   if(isset($res)){
+    while($row = mysqli_fetch_assoc($res) ) {?>
         <!--echo "id: " . $row["id"]. " - description: " . $row["description"]. " date : " . $row["date"]." priority : " . $row["priority"]. "<br>";-->
-        <tr>
+        <?php 
+            if($row["status"] == 0){
+                $color = '#ff726f';
+                $status = 'Undone';
+            }
+            else {
+                $color = '#98FB98';
+                $status = 'Done';
+            }
+        ?>
+        <tr bgcolor = <?php   echo $color; ?>>
             <td>
                 <?php   echo $row["description"]; ?>
             </td>
@@ -46,11 +65,21 @@
             </td>
 
             <td>
-            <?php echo $row["status"]; ?>
+            <?php echo $status; ?>
+            </td>
+    
+            <td>
+                <a class="suppr" href="home.php?del_task=<?php echo $row['id'] ?>"> X</a>
+            </td>
+            <td>
+                <a class="modif" href="modify_task.php?modify_task=<?php echo $row['id'] ?>"> M</a>
             </td>
         </tr>
         
-        <?php }?>
+        
+        
+        <?php }}?>
         </table>
+ 
 </body>
 </html>

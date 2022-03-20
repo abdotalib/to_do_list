@@ -37,11 +37,18 @@
 </html>
 
 <?php
-    include_once('C:/xampp/htdocs/to_do_list/Controllers/Controllers.php');
+    include_once('../Controllers/Controllers.php');
     $control = new Controllers();    
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // collect value of input field
         $control->insert_task('task', $_POST['description'], $_POST['date'], $_POST['priority']);
-        
+      }
+      //include('C:/xampp/htdocs/to_do_list/Controllers/Controllers.php');
+      //echo 'ana jit hna aw3di ana';
+      $cntl = new Controllers();
+      if(isset($_GET['del_task'])) {
+          $id = $_GET['del_task'];
+          $cntl->del_task('task', $id);
+          //header('Location: ../views/home.php');
       }
 ?>

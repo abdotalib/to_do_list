@@ -49,5 +49,45 @@
             //return $this->db_cnx->query('select * from'. $table.';');
 
         }
+        public function find_one_task($table, $id){
+            $q = "select * from ".$table." where "."id =".$id.";";
+            $result = mysqli_query(self::$db_cnx, $q);
+            if (mysqli_num_rows($result) > 0) {
+                // output data of each row
+                /*
+                while($row = mysqli_fetch_assoc($result)) {
+                    echo "id: " . $row["id"]. " - description: " . $row["description"]. " date : " . $row["date"]." priority : " . $row["priority"]. "<br>";}
+                */
+                return $result;
+            } else {
+                echo "0 results";
+                }
+                //mysqli_close($conn);
+
+
+            //return $this->db_cnx->query('select * from'. $table.';');
+
+        }
+
+
+        public function del_task($table, $id){
+            $q = "delete from ".$table." where "."id =".$id.";";
+            if (mysqli_query(self::$db_cnx, $q)) {
+                echo "Record deleted successfully";
+              } else {
+                echo "Error deleting record: " . mysqli_error(self::$db_cnx);
+              }
+        }
+        public function modify_task($table, $id, $obj){
+            $q = "update ".$table." SET description ='".$obj->get_description()."',date='".$obj->get_date()."',priority='".$obj->get_priority()."', status='".$obj->get_status()."' WHERE id=".$id;
+
+            if (mysqli_query(self::$db_cnx, $q)) {
+                echo "Record updated successfully";
+              } else {
+                echo "Error updating record: " . mysqli_error(self::$db_cnx);
+              }
+              
+        }
+
     }
 ?>

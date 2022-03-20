@@ -1,6 +1,6 @@
 <?php
-    include('C:/xampp/htdocs/to_do_list/models/ToDoList.php');
-    include('C:/xampp/htdocs/to_do_list/models/model.php');
+    include('../models/ToDoList.php');
+    include('../models/model.php');
     
     class Controllers{
         function insert_task($table, $desc, $date, $priority){
@@ -15,7 +15,24 @@
             $model = new model();
             return $model->find_all_task($table);
         }
+        
+        function show_one_task($table, $id){
+            $model = new model();
+            return $model->find_one_task($table, $id);
+        }
 
+        function del_task($table, $id){
+            $model = new model();
+            return $model->del_task($table, $id);
+        }
+
+        function  modify_task($table, $id, $description, $date, $priority, $status){
+            $task = new ToDoList();
+            $model = new model();
+            $task->set_task( $description, $date, $priority, $status);
+            $model->modify_task($table, $id, $task);
+
+        }
 
 
     }
